@@ -16,7 +16,7 @@ abstract class ArtemisWeaveExtension @Inject constructor(
      */
     @get:Optional
     @get:OutputDirectories
-    private val classesDirs = objectFactory.fileCollection()
+    val classesDirs = objectFactory.fileCollection()
 
     /**
      * Enabled weaving of pooled components (more viable on Android than JVM).
@@ -28,15 +28,15 @@ abstract class ArtemisWeaveExtension @Inject constructor(
      * If false, no weaving will take place (useful for debugging).
      */
     @get:Input
-    private val enabled by PropertyDelegate(objectFactory, Boolean::class, false)
+    val enabled by PropertyDelegate(objectFactory, Boolean::class, false)
 
     @get:Input
-    private val optimizeEntitySystems by PropertyDelegate(objectFactory, Boolean::class, false)
+    val optimizeEntitySystems by PropertyDelegate(objectFactory, Boolean::class, false)
 
     /**
      * Generate optimized read/write classes for entity link fields, used
      * by the [com.artemis.link.EntityLinkManager].
      */
     @get:Input
-    private val generateLinkMutators by PropertyDelegate(objectFactory, Boolean::class, false)
+    val generateLinkMutators by PropertyDelegate(objectFactory, Boolean::class, false)
 }
