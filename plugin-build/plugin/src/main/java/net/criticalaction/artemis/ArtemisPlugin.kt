@@ -13,7 +13,6 @@ class ArtemisPlugin : Plugin<Project> {
             "artemis"
         )
 
-
         target.tasks.create<ArtemisFluidTask>("generateFluidSource") {
             val fluidExtension = extension.fluid
             enabled.set(fluidExtension.enabled)
@@ -33,5 +32,4 @@ class ArtemisPlugin : Plugin<Project> {
             generateLinkMutators.set(weaveExtension.generateLinkMutators)
         }
     }
-
 }

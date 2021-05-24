@@ -12,7 +12,6 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
-
 open class ArtemisWeaveTask @Inject constructor(
     objectFactory: ObjectFactory
 ) : DefaultTask() {
@@ -53,7 +52,6 @@ open class ArtemisWeaveTask @Inject constructor(
     @get:Optional
     val generateLinkMutators = objectFactory.property(Boolean::class).convention(true)
 
-
     @TaskAction
     fun weave() {
         logger.info("Artemis plugin started.")
@@ -63,16 +61,6 @@ open class ArtemisWeaveTask @Inject constructor(
             return
         }
 
-        //val start = System.currentTimeMillis()
-        //@todo provide gradle alternative.
-        //if (context != null && !context.hasDelta(sourceDirectory)) return;
-
-        //@todo provide gradle alternative.
-        //if (context != null && !context.hasDelta(sourceDirectory)) return;
-
-//		log.info("");
-
-//		log.info("");
         logger.info("CONFIGURATION")
         logger.info(WeaverLog.LINE.replace("\n", ""))
         logger.info(WeaverLog.format("enablePooledWeaving", enablePooledWeaving))

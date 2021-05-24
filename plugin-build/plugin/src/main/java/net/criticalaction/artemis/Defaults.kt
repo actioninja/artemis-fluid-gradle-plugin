@@ -2,11 +2,11 @@ package net.criticalaction.artemis
 
 const val ARTEMIS_GROUP = "artemis"
 
-//Fluid plugin options
+// Fluid plugin options
 const val DEFAULT_FLUID_ENABLED = true
 const val DEFAULT_FLUID_GENERATED_SOURCES_DIRECTORY = "generated/fluid"
 
-//Fluid generator preferences
+// Fluid generator preferences
 const val DEFAULT_SWALLOW_GETTERS = false
 const val DEFAULT_PREFIX_COMPONENT_GETTER = "get"
 const val DEFAULT_PREFIX_COMPONENT_CREATE = ""
