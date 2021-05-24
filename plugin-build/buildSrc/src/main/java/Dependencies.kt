@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTEST = "4.6.0"
+    const val KOTEST = "4.5.0"
     const val ARTEMIS = "2.3.0"
 }
 

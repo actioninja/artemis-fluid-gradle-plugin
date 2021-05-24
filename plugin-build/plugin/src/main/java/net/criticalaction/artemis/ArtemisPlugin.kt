@@ -13,10 +13,13 @@ class ArtemisPlugin : Plugin<Project> {
             "artemis"
         )
 
+
         target.tasks.create<ArtemisFluidTask>("generateFluidSource") {
             val fluidExtension = extension.fluid
             enabled.set(fluidExtension.enabled)
-            classpath.setFrom(fluidExtension.classpath)
+            if(fluidExtension.classpath != null) {
+                classpath.setFrom(fluidExtension.classpath)
+            }
             generatedSourcesDirectory.set(fluidExtension.generatedSourcesDirectory)
             preferences.set(extension.fluid.generator.toConfigurationObject())
 

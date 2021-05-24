@@ -23,10 +23,11 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.options.Option
 import org.gradle.kotlin.dsl.newInstance
 import javax.inject.Inject
 
-abstract class ArtemisFluidExtension @Inject constructor(
+open class ArtemisFluidExtension @Inject constructor(
     objectFactory: ObjectFactory,
     projectLayout: ProjectLayout,
 ) {
@@ -35,7 +36,7 @@ abstract class ArtemisFluidExtension @Inject constructor(
     var enabled by PropertyDelegate(objectFactory, Boolean::class, true)
 
     @get:InputDirectory
-    var classpath by DirectoryPropertyDelegate(objectFactory)
+    var classpath by DirectoryPropertyDelegate(objectFactory, dir())
 
     @get:OutputDirectory
     @get:Optional
@@ -52,7 +53,7 @@ abstract class ArtemisFluidExtension @Inject constructor(
         action.execute(generator)
     }
 
-    abstract class FluidGeneratorConfig @Inject constructor(
+    open class FluidGeneratorConfig @Inject constructor(
         objectFactory: ObjectFactory
     ) {
         @get:Input
