@@ -1,7 +1,7 @@
 object PluginCoordinates {
     const val ID = "net.criticalaction.artemis"
     const val GROUP = "net.criticalaction.artemis"
-    const val VERSION = "1.0.0"
+    const val VERSION = "2.3.0-0.0.1"
     const val IMPLEMENTATION_CLASS = "net.criticalaction.artemis.ArtemisPlugin"
 }
 
