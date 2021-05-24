@@ -4,7 +4,6 @@ import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldNotBe
 import org.gradle.testfixtures.ProjectBuilder
 
-
 class ArtemisFluidPluginTest : ShouldSpec({
     context("Using the plugin ID") {
         should("Apply the plugin") {

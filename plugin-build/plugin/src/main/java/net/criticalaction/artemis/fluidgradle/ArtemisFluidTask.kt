@@ -9,11 +9,12 @@ import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.net.MalformedURLException
 import java.net.URL
 import javax.inject.Inject
-
 
 open class ArtemisFluidTask @Inject constructor(
     objectFactory: ObjectFactory
@@ -23,14 +24,13 @@ open class ArtemisFluidTask @Inject constructor(
         group = ARTEMIS_GROUP
     }
 
-
     @get:Input
     val enabled = objectFactory.property(Boolean::class.java).convention(true)
 
-    @get:Input
+    @get:OutputDirectory
     val generatedSourcesDirectory = objectFactory.directoryProperty()
 
-    @get:Input
+    @get:InputFiles
     val classpath: ConfigurableFileCollection = objectFactory.fileCollection()
 
     @get:Input
@@ -49,7 +49,6 @@ open class ArtemisFluidTask @Inject constructor(
         }
 
         prepareGeneratedSourcesFolder()
-        includeGeneratedSourcesInCompilation()
         FluidGenerator().generate(
             classpathAsUrls(preferences.get()),
             generatedSourcesDirectory.files().singleFile,
@@ -59,7 +58,7 @@ open class ArtemisFluidTask @Inject constructor(
     }
 
     /**
-     * bridge maven/internal logging.
+     * bridge gradle/internal logging.
      */
     private fun createLogAdapter(): Log {
         return object : Log {
@@ -80,13 +79,6 @@ open class ArtemisFluidTask @Inject constructor(
         if (!generatedSourcesDirectory.isPresent && !generatedSourcesDirectory.files().singleFile.mkdirs()) {
             logger.error("Could not create $generatedSourcesDirectory")
         }
-    }
-
-    /**
-     * Must include manually, or maven buids will fail.
-     */
-    private fun includeGeneratedSourcesInCompilation() {
-//		getProject().addCompileSourceRoot(generatedSourcesDirectory().getPath());
     }
 
     private fun classpathAsUrls(preferences: FluidGeneratorPreferences): Set<URL>? {

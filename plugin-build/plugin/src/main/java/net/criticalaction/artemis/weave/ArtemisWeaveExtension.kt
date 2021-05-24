@@ -1,10 +1,10 @@
 package net.criticalaction.artemis.weave
 
-import net.criticalaction.artemis.util.PropertyDelegate
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectories
+import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 open class ArtemisWeaveExtension @Inject constructor(
@@ -21,21 +21,25 @@ open class ArtemisWeaveExtension @Inject constructor(
      * Enabled weaving of pooled components (more viable on Android than JVM).
      */
     @get:Input
-    val enablePooledWeaving by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val enablePooledWeaving = objectFactory.property(Boolean::class).convention(false)
 
     /**
      * If false, no weaving will take place (useful for debugging).
      */
     @get:Input
-    val enabled by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val enabled = objectFactory.property(Boolean::class).convention(true)
 
     @get:Input
-    val optimizeEntitySystems by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val optimizeEntitySystems = objectFactory.property(Boolean::class).convention(true)
 
     /**
      * Generate optimized read/write classes for entity link fields, used
      * by the [com.artemis.link.EntityLinkManager].
      */
     @get:Input
-    val generateLinkMutators by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val generateLinkMutators = objectFactory.property(Boolean::class).convention(true)
 }

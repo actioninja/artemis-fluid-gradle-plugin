@@ -17,16 +17,21 @@ class ArtemisPlugin : Plugin<Project> {
         target.tasks.create<ArtemisFluidTask>("generateFluidSource") {
             val fluidExtension = extension.fluid
             enabled.set(fluidExtension.enabled)
-            if(fluidExtension.classpath != null) {
-                classpath.setFrom(fluidExtension.classpath)
-            }
+            classpath.setFrom(fluidExtension.classpath)
             generatedSourcesDirectory.set(fluidExtension.generatedSourcesDirectory)
             preferences.set(extension.fluid.generator.toConfigurationObject())
 
             preferences.convention(FluidGeneratorPreferences())
         }
 
-        target.tasks.create<ArtemisWeaveTask>("weaveBytecode")
+        target.tasks.create<ArtemisWeaveTask>("weaveBytecode") {
+            val weaveExtension = extension.weave
+            classesDirs.setFrom(weaveExtension.classesDirs)
+            enablePooledWeaving.set(weaveExtension.enablePooledWeaving)
+            enableWeave.set(weaveExtension.enabled)
+            optimizeEntitySystems.set(weaveExtension.optimizeEntitySystems)
+            generateLinkMutators.set(weaveExtension.generateLinkMutators)
+        }
     }
 
 }

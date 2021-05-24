@@ -3,13 +3,13 @@ package net.criticalaction.artemis.weave
 import com.artemis.Weaver
 import com.artemis.WeaverLog
 import net.criticalaction.artemis.ARTEMIS_GROUP
-import net.criticalaction.artemis.util.PropertyDelegate
 import org.gradle.api.DefaultTask
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectories
 import org.gradle.api.tasks.TaskAction
+import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 
@@ -24,7 +24,6 @@ open class ArtemisWeaveTask @Inject constructor(
     /**
      * Root directories for class files.
      */
-    @get:Optional
     @get:OutputDirectories
     val classesDirs = objectFactory.fileCollection()
 
@@ -32,30 +31,34 @@ open class ArtemisWeaveTask @Inject constructor(
      * Enabled weaving of pooled components (more viable on Android than JVM).
      */
     @get:Input
-    val enablePooledWeaving by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val enablePooledWeaving = objectFactory.property(Boolean::class).convention(false)
 
     /**
      * If false, no weaving will take place (useful for debugging).
      */
     @get:Input
-    val enableArtemisPlugin by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val enableWeave = objectFactory.property(Boolean::class).convention(true)
 
     @get:Input
-    val optimizeEntitySystems by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val optimizeEntitySystems = objectFactory.property(Boolean::class).convention(true)
 
     /**
      * Generate optimized read/write classes for entity link fields, used
      * by the [com.artemis.link.EntityLinkManager].
      */
     @get:Input
-    val generateLinkMutators by PropertyDelegate(objectFactory, Boolean::class, false)
+    @get:Optional
+    val generateLinkMutators = objectFactory.property(Boolean::class).convention(true)
 
 
     @TaskAction
     fun weave() {
         logger.info("Artemis plugin started.")
 
-        if (!enableArtemisPlugin) {
+        if (!enableWeave.get()) {
             logger.info("Plugin disabled via 'enableArtemisPlugin' set to false.")
             return
         }
@@ -78,9 +81,9 @@ open class ArtemisWeaveTask @Inject constructor(
         logger.info(WeaverLog.format("outputDirectories", classesDirs.files))
         logger.info(WeaverLog.LINE.replace("\n", ""))
 
-        Weaver.enablePooledWeaving(enablePooledWeaving)
-        Weaver.generateLinkMutators(generateLinkMutators)
-        Weaver.optimizeEntitySystems(optimizeEntitySystems)
+        Weaver.enablePooledWeaving(enablePooledWeaving.get())
+        Weaver.generateLinkMutators(generateLinkMutators.get())
+        Weaver.optimizeEntitySystems(optimizeEntitySystems.get())
 
         val weaver = Weaver(classesDirs.files)
 
