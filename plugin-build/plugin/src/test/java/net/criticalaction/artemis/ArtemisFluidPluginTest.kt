@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldNotBe
 import org.gradle.testfixtures.ProjectBuilder
 
 
-class ArtemisFluidPluginTest: ShouldSpec({
+class ArtemisFluidPluginTest : ShouldSpec({
     context("Using the plugin ID") {
         should("Apply the plugin") {
             val project = ProjectBuilder.builder().build()

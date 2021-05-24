@@ -1,20 +1,29 @@
 package net.criticalaction.artemis.fluidgradle
 
 import com.artemis.FluidGeneratorPreferences
-import net.criticalaction.artemis.*
+import net.criticalaction.artemis.DEFAULT_EXCLUDE_FROM_CLASSPATH
+import net.criticalaction.artemis.DEFAULT_EXCLUDE_GENERATION
+import net.criticalaction.artemis.DEFAULT_GENERATE_BOOLEAN_ACCESSORS
+import net.criticalaction.artemis.DEFAULT_GENERATE_GROUP_METHODS
+import net.criticalaction.artemis.DEFAULT_GENERATE_TAG_METHODS
+import net.criticalaction.artemis.DEFAULT_PREFIX_COMPONENT_CREATE
+import net.criticalaction.artemis.DEFAULT_PREFIX_COMPONENT_GETTER
+import net.criticalaction.artemis.DEFAULT_PREFIX_COMPONENT_HAS
+import net.criticalaction.artemis.DEFAULT_PREFIX_COMPONENT_REMOVE
+import net.criticalaction.artemis.DEFAULT_SWALLOW_GETTERS
 import net.criticalaction.artemis.util.DirectoryPropertyDelegate
 import net.criticalaction.artemis.util.ListPropertyDelegate
 import net.criticalaction.artemis.util.PropertyDelegate
 import org.gradle.api.Action
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.ProjectLayout
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.ListProperty
-import org.gradle.api.provider.Property
-import org.gradle.api.tasks.*
-import org.gradle.kotlin.dsl.listProperty
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Nested
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.kotlin.dsl.newInstance
-import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 abstract class ArtemisFluidExtension @Inject constructor(
@@ -76,7 +85,11 @@ abstract class ArtemisFluidExtension @Inject constructor(
 
         @get:Input
         @get:Optional
-        var generateBooleanComponentAccessors by PropertyDelegate(objectFactory, Boolean::class, DEFAULT_GENERATE_BOOLEAN_ACCESSORS)
+        var generateBooleanComponentAccessors by PropertyDelegate(
+            objectFactory,
+            Boolean::class,
+            DEFAULT_GENERATE_BOOLEAN_ACCESSORS
+        )
 
         @get:Input
         @get:Optional

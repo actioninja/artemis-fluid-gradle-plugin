@@ -6,14 +6,10 @@ import com.artemis.generator.util.Log
 import net.criticalaction.artemis.ARTEMIS_GROUP
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.*
-import org.gradle.api.tasks.options.Option
-import java.io.File
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskAction
 import java.net.MalformedURLException
 import java.net.URL
 import javax.inject.Inject
@@ -21,7 +17,7 @@ import javax.inject.Inject
 
 open class ArtemisFluidTask @Inject constructor(
     objectFactory: ObjectFactory
-): DefaultTask() {
+) : DefaultTask() {
     init {
         description = "Generate Fluid API for provided component sources"
         group = ARTEMIS_GROUP
@@ -43,11 +39,11 @@ open class ArtemisFluidTask @Inject constructor(
     @TaskAction
     fun fluid() {
         logger.info("Artemis Fluid api plugin started.")
-        if(!enabled.get()) {
+        if (!enabled.get()) {
             logger.info("Artemis Fluid not running because it is disabled.")
             return
         }
-        if(classpath.isEmpty) {
+        if (classpath.isEmpty) {
             logger.info("Artemis Fluid not running because classpath is not configured.")
             return
         }

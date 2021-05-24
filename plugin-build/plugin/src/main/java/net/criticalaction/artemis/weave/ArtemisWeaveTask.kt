@@ -4,17 +4,18 @@ import com.artemis.Weaver
 import com.artemis.WeaverLog
 import net.criticalaction.artemis.ARTEMIS_GROUP
 import net.criticalaction.artemis.util.PropertyDelegate
-
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.tasks.*
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectories
+import org.gradle.api.tasks.TaskAction
 import javax.inject.Inject
 
 
 open class ArtemisWeaveTask @Inject constructor(
     objectFactory: ObjectFactory
-): DefaultTask() {
+) : DefaultTask() {
     init {
         description = ""
         group = ARTEMIS_GROUP
@@ -74,14 +75,14 @@ open class ArtemisWeaveTask @Inject constructor(
         logger.info(WeaverLog.format("enablePooledWeaving", enablePooledWeaving))
         logger.info(WeaverLog.format("generateLinkMutators", generateLinkMutators))
         logger.info(WeaverLog.format("optimizeEntitySystems", optimizeEntitySystems))
-        logger.info(WeaverLog.format("outputDirectories", classesDirs?.files))
+        logger.info(WeaverLog.format("outputDirectories", classesDirs.files))
         logger.info(WeaverLog.LINE.replace("\n", ""))
 
         Weaver.enablePooledWeaving(enablePooledWeaving)
         Weaver.generateLinkMutators(generateLinkMutators)
         Weaver.optimizeEntitySystems(optimizeEntitySystems)
 
-        val weaver = Weaver(classesDirs?.files)
+        val weaver = Weaver(classesDirs.files)
 
         val processed: WeaverLog = weaver.execute()
         for (s in processed.formattedLog.split("\n")) {

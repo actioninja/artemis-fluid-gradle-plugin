@@ -4,7 +4,6 @@ import net.criticalaction.artemis.fluidgradle.ArtemisFluidExtension
 import net.criticalaction.artemis.weave.ArtemisWeaveExtension
 import org.gradle.api.Action
 import org.gradle.api.tasks.Nested
-import javax.inject.Inject
 
 abstract class ArtemisExtension {
     @get:Nested
