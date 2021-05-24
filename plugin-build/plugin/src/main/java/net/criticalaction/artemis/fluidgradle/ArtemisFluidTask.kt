@@ -44,6 +44,11 @@ open class ArtemisFluidTask @Inject constructor(
     fun fluid() {
         logger.info("Artemis Fluid api plugin started.")
         if(!enabled.get()) {
+            logger.info("Artemis Fluid not running because it is disabled.")
+            return
+        }
+        if(classpath.isEmpty) {
+            logger.info("Artemis Fluid not running because classpath is not configured.")
             return
         }
 

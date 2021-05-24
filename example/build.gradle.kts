@@ -5,6 +5,7 @@ plugins {
 
 artemis {
     fluid {
+        enabled = false
         generator {
 
         }

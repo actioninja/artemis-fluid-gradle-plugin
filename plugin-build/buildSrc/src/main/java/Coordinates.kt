@@ -6,15 +6,18 @@ object PluginCoordinates {
 }
 
 object PluginBundle {
-    const val VCS = "https://github.com/cortinico/kotlin-gradle-plugin-template"
-    const val WEBSITE = "https://github.com/cortinico/kotlin-gradle-plugin-template"
-    const val DESCRIPTION = "An empty Gradle plugin created from a template"
-    const val DISPLAY_NAME = "An empty Gradle Plugin from a template"
+    const val VCS = "https://github.com/actioninja/artemis-odb-gradle-plugin"
+    const val WEBSITE = "https://github.com/actioninja/artemis-odb-gradle-plugin"
+    const val DESCRIPTION = "A modernized plugin to support artemis-odb ECS weaving and fluid API"
+    const val DISPLAY_NAME = "artemis-odb plugin"
     val TAGS = listOf(
         "plugin",
         "gradle",
-        "sample",
-        "template"
+        "artemis",
+        "odb",
+        "ecs",
+        "weave",
+        "fluid"
     )
 }
 
