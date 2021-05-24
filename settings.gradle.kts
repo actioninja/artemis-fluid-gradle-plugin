@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = ("kotlin-gradle-plugin-template")
+rootProject.name = ("artemis-odb-fluid-plugin")
 
 include(":example")
 includeBuild("plugin-build")

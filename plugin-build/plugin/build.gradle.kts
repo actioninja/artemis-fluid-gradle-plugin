@@ -1,14 +1,19 @@
 plugins {
     kotlin("jvm")
+    `kotlin-dsl`
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk7"))
-    implementation(gradleApi())
+    implementation(kotlin("stdlib"))
 
-    testImplementation(TestingLib.JUNIT)
+    implementation("net.onedaybeard.artemis:artemis-fluid-core:${Versions.ARTEMIS}")
+    implementation("net.onedaybeard.artemis:artemis-odb-weaver:${Versions.ARTEMIS}")
+
+    testImplementation(TestingLib.KOTEST)
+    testImplementation(TestingLib.KOTEST_ASSERT)
+    testImplementation(TestingLib.KOTEST_PROPERTY)
 }
 
 java {
@@ -52,4 +57,8 @@ tasks.create("setupPluginUploadFromEnvironment") {
         System.setProperty("gradle.publish.key", key)
         System.setProperty("gradle.publish.secret", secret)
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

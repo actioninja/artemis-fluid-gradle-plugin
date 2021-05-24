@@ -6,6 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = ("com.ncorti.kotlin.gradle.template")
+rootProject.name = ("net.criticalaction.artemis.fluidplugin")
 
 include(":plugin")

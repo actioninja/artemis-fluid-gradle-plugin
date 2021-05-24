@@ -1,5 +1,6 @@
 object Versions {
-    const val JUNIT = "4.13.2"
+    const val KOTEST = "4.6.0"
+    const val ARTEMIS = "2.3.0"
 }
 
 object BuildPluginsVersion {
@@ -11,5 +12,7 @@ object BuildPluginsVersion {
 }
 
 object TestingLib {
-    const val JUNIT = "junit:junit:${Versions.JUNIT}"
+    const val KOTEST = "io.kotest:kotest-runner-junit5:${Versions.KOTEST}"
+    const val KOTEST_ASSERT = "io.kotest:kotest-assertions-core:${Versions.KOTEST}"
+    const val KOTEST_PROPERTY = "io.kotest:kotest-assertions-core:${Versions.KOTEST}"
 }

@@ -1,8 +1,18 @@
 plugins {
     java
-    id("com.ncorti.kotlin.gradle.template.plugin")
+    id("net.criticalaction.artemis")
 }
 
-templateExampleConfig {
-    message.set("Just trying this gradle plugin...")
+artemis {
+    fluid {
+        generator {
+
+        }
+    }
+}
+
+tasks.create("causeError") {
+    doLast {
+        logger.error("Piss!")
+    }
 }
